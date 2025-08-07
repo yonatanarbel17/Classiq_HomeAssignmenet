@@ -42,7 +42,7 @@ async def get_task_status(task_id: str):
     status = job.get_status()
 
     if status == 'finished':
-        result = job.return_value  # FIXED: use return_value instead of deprecated result
+        result = job.return_value 
         return {"status": "completed", "result": result}
     elif status in ('queued', 'started'):
         return {"status": "pending", "message": "Task is still in progress."}

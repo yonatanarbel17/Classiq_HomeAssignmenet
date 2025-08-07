@@ -40,7 +40,7 @@ def test_get_task_result(task_id):
 
         if status == "completed":
             result = data.get("result")
-            print("DEBUG result:", result)  # Optional for inspection
+            print("DEBUG result:", result) 
             assert isinstance(result, dict)
             assert all(isinstance(k, str) and isinstance(v, int) for k, v in result.items())
             return
