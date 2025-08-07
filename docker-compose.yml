@@ -25,3 +25,12 @@ services:
     restart: always
     depends_on:
       - redis
+
+  test_runner:
+    build:
+      context: .
+      dockerfile: api_server.Dockerfile
+    container_name: test_runner
+    command: ["pytest"]
+    depends_on:
+      - redis

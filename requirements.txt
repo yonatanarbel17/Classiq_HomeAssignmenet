@@ -4,3 +4,6 @@ qiskit
 qiskit-aer
 redis
 rq
+pytest
+pytest-asyncio
+httpx
