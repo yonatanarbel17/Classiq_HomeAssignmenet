@@ -25,7 +25,6 @@ async def create_task(payload: Dict[str, str]):
     task_id = str(uuid4())
 
     # Enqueue the job to be processed by the worker.
-    # The job_id is used to retrieve the task status later.
     job = q.enqueue(execute_quantum_circuit, qasm3_string, job_id=task_id)
 
     return {"task_id": job.id, "message": "Task submitted successfully."}
@@ -41,11 +40,11 @@ async def get_task_status(task_id: str):
         raise HTTPException(status_code=404, detail={"status": "error", "message": "Task not found."})
 
     status = job.get_status()
-    
+
     if status == 'finished':
-        result = job.result
+        result = job.return_value  # FIXED: use return_value instead of deprecated result
         return {"status": "completed", "result": result}
     elif status in ('queued', 'started'):
         return {"status": "pending", "message": "Task is still in progress."}
-    else: # This covers 'failed', 'deferred', and other states
+    else:
         return {"status": "error", "message": "An error occurred during task processing."}
