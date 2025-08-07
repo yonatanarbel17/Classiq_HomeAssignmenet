@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+qiskit
+qiskit-aer
+redis
+rq
