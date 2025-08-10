@@ -18,7 +18,6 @@ def execute_quantum_circuit(qasm3_string: str) -> dict:
         result = job.result()
         counts = result.get_counts()
 
-        # The counts dictionary is returned.
         return counts
     except Exception as e:
         # Log the error for debugging purposes.
